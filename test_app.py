@@ -1,6 +1,7 @@
 import unittest
 from app import app, compute_mandelbrot, plot_mandelbrot
 import numpy as np
+import xmlrunner  # Import the xmlrunner module
 
 class TestMandelbrotApp(unittest.TestCase):
     def setUp(self):
@@ -8,14 +9,14 @@ class TestMandelbrotApp(unittest.TestCase):
         self.app = app.test_client()
 
     def test_compute_mandelbrot(self):
-            # Test the computation of the Mandelbrot set
-            width, height = 800, 600
-            result = compute_mandelbrot(-2.0, 1.0, -1.5, 1.5, width, height, 20)
-            # expecting result.shape to be (width, height)
-            self.assertEqual(result.shape, (width, height))
-            self.assertIn(False, result)  # There should be some points that do not belong to the set
-            self.assertIn(True, result)  # There should be some points that do belong to the set
-        
+        # Test the computation of the Mandelbrot set
+        width, height = 800, 600
+        result = compute_mandelbrot(-2.0, 1.0, -1.5, 1.5, width, height, 20)
+        # expecting result.shape to be (width, height)
+        self.assertEqual(result.shape, (width, height))
+        self.assertIn(False, result)  # There should be some points that do not belong to the set
+        self.assertIn(True, result)  # There should be some points that do belong to the set
+
     def test_plot_mandelbrot(self):
         # Test the plotting of the Mandelbrot set
         image_data = plot_mandelbrot(-2.0, 1.0, -1.5, 1.5)
@@ -39,4 +40,5 @@ class TestMandelbrotApp(unittest.TestCase):
         self.assertIn('image_data', data)
 
 if __name__ == '__main__':
-    unittest.main()
+    # Use the xmlrunner to generate JUnit XML test reports
+    unittest.main(testRunner=xmlrunner.XMLTestRunner(output='test-reports'))
