@@ -1,4 +1,4 @@
-name: Docker Pull the Package image, Run Tests on it and Upload test results as Artifacts to Github.
+name: Docker Pull image from Github Packages, Run Tests on it and Upload test results as Artifacts to Github.
 
 on:
   pull_request:
@@ -24,6 +24,8 @@ jobs:
         run: |
           docker run --rm ghcr.io/bsarahle/cbd3345_ica2/python-app:latest python -m unittest test_app.py > test_output.txt
           cat test_output.txt
+          echo "Getting the list of directory"
+          ls
 
       # Upload test output to GitHub Artifacts
       - name: Upload Test Output
