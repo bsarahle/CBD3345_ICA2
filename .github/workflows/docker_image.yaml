@@ -23,6 +23,7 @@ jobs:
       - name: Run Docker Container with Tests
         run: |
           docker run --rm ghcr.io/bsarahle/cbd3345_ica2/python-app:latest python -m unittest test_app.py > test_output.txt
+          cat test_output.txt
 
       # Upload test output to GitHub Artifacts
       - name: Upload Test Output
