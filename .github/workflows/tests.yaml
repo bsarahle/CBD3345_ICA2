@@ -23,11 +23,12 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt  # Adjust this based on your project setup
+          pip install -r requirements.txt
 
       - name: Run tests
         run: |
-          python test_app.py >> test-reports  # Append test results to test-reports file
+          python -m unittest test_app.py > test_output.txt
+          cat test_output.txt
 
       - name: Archive test reports
         uses: actions/upload-artifact@v2
