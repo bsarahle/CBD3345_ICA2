@@ -22,15 +22,16 @@ jobs:
 
       - name: Run Docker Container with Tests
         run: |
-          docker run --rm ghcr.io/bsarahle/cbd3345_ica2/python-app:latest python -m unittest test_app.py > test_output.txt
-          cat test_output.txt
+          docker run --rm ghcr.io/bsarahle/cbd3345_ica2/python-app:latest python -m unittest test_app.py > $GITHUB_WORKSPACE/test_output.txt
+          cat $GITHUB_WORKSPACE/test_output.txt
           echo "Getting the list of directory"
           ls
           pwd
+          echo $GITHUB_WORKSPACE
 
       # Upload test output to GitHub Artifacts
       - name: Upload Test Output
         uses: actions/upload-artifact@v2
         with:
           name: test-output
-          path: test_output.txt
+          path: $GITHUB_WORKSPACE/test_output.txt
