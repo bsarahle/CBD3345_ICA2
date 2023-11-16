@@ -27,12 +27,12 @@ jobs:
 
       - name: Run tests
         run: |
-          python -m unittest test_app.py > test_output.txt
-          cat test_output.txt
+          python -m unittest test_app.py > test_reports.txt
+          cat test_reports.txt
 
       - name: Archive test reports
         uses: actions/upload-artifact@v2
         with:
             name: test-reports
-            path: test_output.txt
+            path: test_reports.txt
 
