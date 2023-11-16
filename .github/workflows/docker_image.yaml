@@ -8,9 +8,9 @@ on:
 jobs:
   build-and-deploy:
     runs-on: self-hosted
-    strategy:
-      matrix:
-        runner-label: [mac] # Specify the label for macOS ARM runner
+    # strategy:
+    #   matrix:
+    #     runner-label: [mac] # Specify the label for macOS ARM runner
 
     steps:
       - name: Checkout code
