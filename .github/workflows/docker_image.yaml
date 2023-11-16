@@ -1,4 +1,4 @@
-name: Docker Pull and Run
+name: Docker Pull the Package image, Run Tests on it and Upload test results as Artifacts to Github.
 
 on:
   pull_request:
@@ -7,7 +7,7 @@ on:
       - main
 
 jobs:
-  pull-and-run-docker:
+  pull-run-test-and-upload-artifacts:
     runs-on: self-hosted
 
     steps:
@@ -20,7 +20,13 @@ jobs:
       - name: Pull Docker Image
         run: docker pull ghcr.io/bsarahle/cbd3345_ica2/python-app:latest
 
-      - name: Run Docker Image
-        run: docker run ghcr.io/bsarahle/cbd3345_ica2/python-app:latest
+      - name: Run Docker Container with Tests
+        run: |
+          docker run --rm ghcr.io/bsarahle/cbd3345_ica2/python-app:latest python -m unittest test_app.py > test_output.txt
 
-      # Add additional steps as needed
+      # Upload test output to GitHub Artifacts
+      - name: Upload Test Output
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-output
+          path: test_output.txt
