@@ -26,18 +26,11 @@ jobs:
           pip install -r requirements.txt  # Adjust this based on your project setup
 
       - name: Run tests
-        id: test
         run: |
-          python test_app.py
-          echo "Test status: $?" >> test_status.txt
+          python test_app.py >> test-reports  # Append test results to test-reports file
 
       - name: Archive test reports
         uses: actions/upload-artifact@v2
-        if: success() # Upload test reports only if the tests pass
         with:
           name: test-reports
           path: test-reports
-
-      - name: Display test status
-        if: always() # Display the test status regardless of pass or fail
-        run: cat test_status.txt
