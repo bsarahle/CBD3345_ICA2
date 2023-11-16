@@ -1,21 +1,26 @@
-name: Run Docker Image
+name: Docker Pull and Run
 
 on:
+  pull_request:
   push:
     branches:
       - main
 
 jobs:
-  run-docker-image:
-    runs-on: ubuntu-latest
+  pull-and-run-docker:
+    runs-on: self-hosted
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
-      - name: Set up Docker
-        uses: docker/setup-docker@v2
+      - name: Authenticate with GHCR
+        run: echo "${{ secrets.GHCR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Pull Docker Image
+        run: docker pull ghcr.io/bsarahle/cbd3345_ica2/python-app:latest
 
       - name: Run Docker Image
-        run: |
-          docker run docker.pkg.github.com/bsarahle/cbd3345_ica2/python-app:latest
+        run: docker run ghcr.io/bsarahle/cbd3345_ica2/python-app:latest
+
+      # Add additional steps as needed
