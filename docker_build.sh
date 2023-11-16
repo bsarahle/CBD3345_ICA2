@@ -1,11 +1,12 @@
 #!/bin/bash
 
 # Variables
-IMAGE_NAME="custom-image-name" # Replace with your desired image name
-DOCKERFILE_PATH="path_to_your_Dockerfile" # Replace with the path to your Dockerfile
+DOCKERFILE_PATH="Dockerfile"
+IMAGE_NAME="python-app"
+TAG="latest"
 
-# Build the Docker image
-docker build -t $IMAGE_NAME -f $DOCKERFILE_PATH .
+# Build Docker image
+docker build -f "$DOCKERFILE_PATH" -t "$IMAGE_NAME:$TAG" .
 
-# Optionally, push the image to a registry
-# docker push $IMAGE_NAME
+# Push the Docker image to your self-hosted registry or Docker Hub
+docker push "$IMAGE_NAME:$TAG"
