@@ -26,6 +26,7 @@ jobs:
           cat test_output.txt
           echo "Getting the list of directory"
           ls
+          pwd
 
       # Upload test output to GitHub Artifacts
       - name: Upload Test Output
