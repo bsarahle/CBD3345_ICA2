@@ -27,8 +27,7 @@ jobs:
 
     - name: Run tests
       run: |
-        python -m pytest
-        # Adjust the test command based on your project's test setup
+        python test_app.py
 
     - name: Archive test reports
       uses: actions/upload-artifact@v2
