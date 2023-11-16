@@ -12,25 +12,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.11
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.11
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt  # Adjust this based on your project setup
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Adjust this based on your project setup
 
-    - name: Run tests
-      run: |
-        python test_app.py
+      - name: Run tests
+        id: test
+        run: |
+          python test_app.py
+          echo "Test status: $?" >> test_status.txt
 
-    - name: Archive test reports
-      uses: actions/upload-artifact@v2
-      with:
-        name: test-reports
-        path: test-reports
+      - name: Archive test reports
+        uses: actions/upload-artifact@v2
+        if: success() # Upload test reports only if the tests pass
+        with:
+          name: test-reports
+          path: test-reports
+
+      - name: Display test status
+        if: always() # Display the test status regardless of pass or fail
+        run: cat test_status.txt
