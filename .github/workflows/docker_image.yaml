@@ -10,7 +10,7 @@ jobs:
     runs-on: self-hosted
     strategy:
       matrix:
-        runner-arch: [macOS] # Specify the label for macOS ARM runner
+        runner-label: [mac] # Specify the label for macOS ARM runner
 
     steps:
       - name: Checkout code
