@@ -28,10 +28,12 @@ jobs:
           ls
           pwd
           echo $GITHUB_WORKSPACE
+          echo ~
+          cp $GITHUB_WORKSPACE/test_output.txt ~
 
       # Upload test output to GitHub Artifacts
       - name: Upload Test Output
         uses: actions/upload-artifact@v2
         with:
           name: test-output
-          path: $GITHUB_WORKSPACE/test_output.txt
+          path: ~/test_output.txt
