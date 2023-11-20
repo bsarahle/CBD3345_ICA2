@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set Execute Permission for run-tests.sh
         run: chmod +x docker-action/run-tests.sh
@@ -21,3 +21,9 @@ jobs:
         run: ./docker-action/run-tests.sh
         env:
           GHCR_PAT: ${{ secrets.GHCR_PAT }}
+
+      - name: Upload Test Output
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-output
+          path: ./docker-action/test_output.txt
