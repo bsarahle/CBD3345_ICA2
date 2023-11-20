@@ -5,7 +5,7 @@ name: Python Unit Tests
 on:
   push:
     branches:
-      - dev
+      - main
 
 jobs:
   test:
@@ -27,7 +27,7 @@ jobs:
 
     - name: Run tests
       run: |
-        python test_app.py
+        python -m unittest test_app.py > ./test-reports/test_output.txt 2>&1
 
     - name: Archive test reports
       uses: actions/upload-artifact@v2
