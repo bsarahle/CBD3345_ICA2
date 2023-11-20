@@ -22,14 +22,11 @@ jobs:
 
       - name: Run Docker Container with Tests
         run: |
-          # Create a subdirectory for test output
-          mkdir -p $GITHUB_WORKSPACE/test_output
-
-          # Run tests and save output in the subdirectory
-          docker run --rm ghcr.io/bsarahle/cbd3345_ica2/python-app:latest python -m unittest test_app.py > $GITHUB_WORKSPACE/test_output/test_output.txt 2>&1
+          # Run tests and save output
+          docker run --rm ghcr.io/bsarahle/cbd3345_ica2/python-app:latest python -m unittest test_app.py > test_output.txt 2>&1
 
       - name: Upload Test Output
         uses: actions/upload-artifact@v2
         with:
           name: test-output
-          path: $GITHUB_WORKSPACE/test_output
+          path: test_output.txt
