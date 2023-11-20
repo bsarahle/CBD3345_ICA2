@@ -26,14 +26,7 @@ jobs:
           mkdir -p $GITHUB_WORKSPACE/test_output
 
           # Run tests and save output in the subdirectory
-          docker run --rm ghcr.io/bsarahle/cbd3345_ica2/python-app:latest python -m unittest test_app.py > $GITHUB_WORKSPACE/test_output/test_output.txt
-          cat $GITHUB_WORKSPACE/test_output/test_output.txt
-
-          # Zip the entire subdirectory using tar
-          tar -cf $GITHUB_WORKSPACE/test_output.tar -C $GITHUB_WORKSPACE test_output
-
-          # Copy the zipped file to ~/Desktop/actions-runner/
-          cp $GITHUB_WORKSPACE/test_output.tar ~/Desktop/actions-runner/
+          docker run --rm ghcr.io/bsarahle/cbd3345_ica2/python-app:latest python -m unittest test_app.py > $GITHUB_WORKSPACE/test_output/test_output.txt 2>&1
 
       - name: Upload Test Output
         uses: actions/upload-artifact@v2
