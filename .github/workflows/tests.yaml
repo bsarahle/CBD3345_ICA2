@@ -27,7 +27,7 @@ jobs:
      
       - name: Run tests
         run: |
-         python test_app.py
+         pytest test_app.py --doctest-modules --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html
          
       - name: Archive test reports
         uses: actions/upload-artifact@v2
