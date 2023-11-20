@@ -25,9 +25,14 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run tests
+      - name: Run tests and log results
         run: |
           python -m unittest test_app.py > test_reports.txt
+          if [ $? -eq 0 ]; then
+            echo "Tests Passed" >> test_reports.txt
+          else
+            echo "Tests Failed" >> test_reports.txt
+          fi
           cat test_reports.txt
 
       - name: Archive test reports
@@ -35,4 +40,3 @@ jobs:
         with:
             name: test-reports
             path: test_reports.txt
-
