@@ -24,6 +24,12 @@ jobs:
         run: |
           docker run --rm ghcr.io/bsarahle/cbd3345_ica2/python-app:latest python -m unittest test_app.py > $GITHUB_WORKSPACE/test_output.txt
           cat $GITHUB_WORKSPACE/test_output.txt
+          
+          # Compress the test output file using gzip
+          gzip $GITHUB_WORKSPACE/test_output.txt
+
+          # Copy the compressed file to /Users/rahul/Desktop/actions-runner
+          cp $GITHUB_WORKSPACE/test_output.txt.gz /Users/rahul/Desktop/actions-runner/
 
       - name: Debug - Print Environment
         run: |
