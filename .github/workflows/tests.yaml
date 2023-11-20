@@ -27,9 +27,8 @@ jobs:
 
       - name: Run tests and log results
         run: |
-          python -m unittest test_app.py > test_results.txt
+          python -m unittest test_app.py >> test_results.txt
           cat test_results.txt
-          python parse_test_results.py test_results.txt
 
       - name: Archive test reports
         uses: actions/upload-artifact@v2
