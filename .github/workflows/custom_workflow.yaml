@@ -26,4 +26,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: test-output
-          path: ./docker-action/test_output.txt
+          path: test_output.txt
