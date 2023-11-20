@@ -37,4 +37,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: test-output
-          path: $GITHUB_WORKSPACE/test_output.txt
+          path: $GITHUB_WORKSPACE
