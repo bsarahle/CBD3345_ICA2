@@ -22,22 +22,18 @@ jobs:
 
       - name: Run Docker Container with Tests
         run: |
-          docker run --rm ghcr.io/bsarahle/cbd3345_ica2/python-app:latest python -m unittest test_app.py > $GITHUB_WORKSPACE/test_output.txt
-          cat $GITHUB_WORKSPACE/test_output.txt
-          
-          # Compress the test output file using gzip
-          gzip $GITHUB_WORKSPACE/test_output.txt
+          # Create a subdirectory for test output
+          mkdir -p $GITHUB_WORKSPACE/test_output
 
-          # Copy the compressed file to /Users/rahul/Desktop/actions-runner
-          cp $GITHUB_WORKSPACE/test_output.txt.gz /Users/rahul/Desktop/actions-runner/
+          # Run tests and save output in the subdirectory
+          docker run --rm ghcr.io/bsarahle/cbd3345_ica2/python-app:latest python -m unittest test_app.py > $GITHUB_WORKSPACE/test_output/test_output.txt
+          cat $GITHUB_WORKSPACE/test_output/test_output.txt
 
-      - name: Debug - Print Environment
-        run: |
-          echo "Current directory: $(pwd)"
-          echo "GitHub workspace: $GITHUB_WORKSPACE"
+          # Zip the entire subdirectory using tar
+          tar -cf $GITHUB_WORKSPACE/test_output.tar -C $GITHUB_WORKSPACE test_output
 
-      - name: Debug - Print Test Output
-        run: cat $GITHUB_WORKSPACE/test_output.txt
+          # Copy the zipped file to ~/Desktop/actions-runner/
+          cp $GITHUB_WORKSPACE/test_output.tar ~/Desktop/actions-runner/
 
       - name: Upload Test Output
         uses: actions/upload-artifact@v2
