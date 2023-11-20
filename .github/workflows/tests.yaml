@@ -24,15 +24,13 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: Run tests and generate XML log
+      - name: Run tests
         run: |
-          python test_app.py > test_log.txt
-          cat test_log.txt | sed -e 's/</\&lt;/g; s/>/\&gt;/g' > test_log.xml  # Escape XML reserved characters
-
-      - name: Archive test log
+         python test_app.py
+         
+      - name: Archive test reports
         uses: actions/upload-artifact@v2
         with:
-          name: test-logs
-          path: test_log.xml
+          name: test-reports
+          path: test-reports
 
