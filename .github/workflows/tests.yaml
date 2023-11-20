@@ -5,14 +5,7 @@ name: Python Unit Tests
 on:
   push:
     branches:
-      - '*'
-      - '!main'
-      - '!master'
-  pull_request:
-    branches:
-      - '*'
-      - '!main'
-      - '!master'
+      - 'dev'
 
 jobs:
   test:

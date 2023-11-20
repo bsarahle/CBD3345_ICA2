@@ -1,0 +1,7 @@
+name: 'Docker Pull and Run Tests'
+description: 'Pulls a Docker image, runs tests, and uploads test output as an artifact.'
+runs:
+  using: 'composite'
+  steps:
+    - run: ./docker-action/run-tests.sh
+      shell: bash

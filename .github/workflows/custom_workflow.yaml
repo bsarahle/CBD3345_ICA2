@@ -1,0 +1,20 @@
+name: Custom workflow to Docker Pull image from Github Packages, Run Tests on it and Upload test results as Artifacts to Github.
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  pull-run-test-and-upload-artifacts:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Docker Pull and Run Tests
+        uses: ./docker-action
+        env:
+          GHCR_PAT: ${{ secrets.GHCR_PAT }}
