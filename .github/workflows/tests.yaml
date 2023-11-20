@@ -33,6 +33,6 @@ jobs:
       - name: Archive test reports
         uses: actions/upload-artifact@v2
         with:
-          name: test-reports
-          path: test-reports
+          name: test-results
+          path: test-results.xml
 
