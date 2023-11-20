@@ -27,18 +27,13 @@ jobs:
 
       - name: Run tests and log results
         run: |
-          python -m unittest test_app.py | tee test_reports.txt
-          tests_completed=$(grep -c 'Ran' test_reports.txt)
-          if grep -q 'FAILED' test_reports.txt; then
-            echo "Tests completed: $tests_completed, Result: Failed" >> test_summary.txt
-            exit 1
-          else
-            echo "Tests completed: $tests_completed, Result: Success" >> test_summary.txt
-          fi
+          python -m unittest test_app.py > test_results.txt
+          cat test_results.txt
+          python parse_test_results.py test_results.txt
 
       - name: Archive test reports
         uses: actions/upload-artifact@v2
         with:
-            name: test-reports
-            path: test_reports.txt test_summary.txt
+          name: test-reports
+          path: test_results.txt
 
