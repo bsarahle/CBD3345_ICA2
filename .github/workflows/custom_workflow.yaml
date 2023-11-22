@@ -8,7 +8,7 @@ on:
 
 jobs:
   pull-run-test-and-upload-artifacts:
-    runs-on: [self-hosted, macOS, ARM64]
+    runs-on: [self-hosted]
 
     steps:
       - name: Checkout Repository
