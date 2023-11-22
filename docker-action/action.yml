@@ -5,7 +5,7 @@ runs:
   steps:
     - name: Run Tests
       run: |
-        if [ "$RUNNER_OS" == "macOs" ]; then
+        if [ "$RUNNER_OS" == "macOS" ]; then
           ./docker-action/run-tests.sh
         elif [ "$RUNNER_OS" == "Windows" ]; then
           ./docker-action/run-tests.bat
