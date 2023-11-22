@@ -1,10 +1,5 @@
 name: 'Docker Pull and Run Tests'
 description: 'Pulls a Docker image, runs tests and save it as test output'
-inputs:
-  script-path:
-    description: 'Path to the script to be executed'
-    required: true
-
 runs:
   using: 'composite'
   steps:
