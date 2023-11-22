@@ -15,6 +15,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set Execute Permission for run-tests.sh
+        if: runner.os == 'macOS'
         run: chmod +x docker-action/run-tests.sh
 
       - name: Docker Pull and Run Tests
