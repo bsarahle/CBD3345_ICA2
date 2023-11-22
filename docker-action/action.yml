@@ -3,5 +3,14 @@ description: 'Pulls a Docker image, runs tests, and uploads test output as an ar
 runs:
   using: 'composite'
   steps:
-    - run: ./docker-action/run-tests.sh
+    - name: Run Tests
+      run: |
+        if [ "$RUNNER_OS" == "macOs" ]; then
+          ./docker-action/run-tests.sh
+        elif [ "$RUNNER_OS" == "Windows" ]; then
+          ./docker-action/run-tests.bat
+        else
+          echo "Unsupported operating system: $RUNNER_OS"
+          exit 1
+        fi
       shell: bash
